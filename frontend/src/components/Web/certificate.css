@@ -1,0 +1,80 @@
+/* Reset default margins and paddings for consistency */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.carousel-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 800px;
+    position: relative;
+    margin: auto;
+    background-color: #f4f4f4;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.carousel-container img {
+    width: 100%;
+    width: 1200px;
+    height: 600px;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border: 5px solid transparent; /* Transparent border for spacing */
+    background-clip: padding-box;
+    background-color: #fff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.carousel-container img:hover {
+    transform: scale(1.05); /* Slight zoom effect on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5); /* Deeper shadow on hover */
+}
+
+.arrow {
+    background-color: rgba(0, 0, 0, 0);
+    color: rgb(0, 0, 0);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    padding: 40%;
+    margin: 0 10px;
+    border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+#prevButton {
+    right: 390px;
+}
+#nextButton {
+    left: 390px;
+}
+
+
+.indicator-container {
+    position: absolute;
+    bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    left: 0;
+}
+
+.indicator {
+    width: 12px;
+    height: 12px;
+    background-color: #bbb;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.indicator.active {
+    background-color: #717171;
+}

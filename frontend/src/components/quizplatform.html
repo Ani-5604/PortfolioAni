@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Registration Form & Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        form, #quiz-container, #certificate-container {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        label, input, select {
+            display: block;
+            margin-bottom: 15px;
+        }
+        input[type="text"], input[type="email"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        input[type="submit"], button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        input[type="submit"]:hover, button:hover {
+            background-color: #45a049;
+        }
+        .options button {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        #quiz-container, #certificate-container {
+            display: none;
+        }
+        #result-message, #score-details, #restart-btn {
+            margin-top: 20px;
+            font-weight: bold;
+            display: none;
+        }
+        /* Certificate styling */
+        #certificate-container {
+            width: 800px; /* Landscape width */
+            height: 500px; /* Landscape height */
+            background-color: #ffffff;
+            padding: 20px;
+            border: 2px solid #000000;
+            border-radius: 10px;
+            text-align: center;
+            margin: 20px auto;
+        }
+        .certificate-content {
+            margin-top: 50px;
+        }
+        .certificate-title {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+        .certificate-details {
+            font-size: 20px;
+            margin-bottom: 10px;
+        }
+        .certificate-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 20px;
+        }
+        .certificate-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+    <h2>User Registration Form</h2>
+    <form id="registration-form" onsubmit="return saveFormData(event)">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="topic">Choose Quiz Subject:</label>
+        <select id="topic" name="topic" required>
+            <option value="DSA">DSA</option>
+            <option value="Digital Electronics">Digital Electronics</option>
+            <option value="C Programming">C Programming</option>
+            <option value="GK">GK</option>
+            <option value="Mathematics Probability">Mathematics Probability</option>
+            <option value="Physics">Physics</option>
+            <option value="Biology">Biology</option>
+            <option value="Computer Organization and Architecture">Computer Organization and Architecture</option>
+            <!-- Add more subjects as needed -->
+        </select>
+
+        <input type="submit" value="Save Data">
+        <button type="button" onclick="saveAndProceedToQuiz()">Save & Proceed to Quiz</button>
+    </form>
+
+    <div id="quiz-container">
+        <h2 id="quiz-title">Quiz</h2>
+        <div id="question-container">
+            <p id="question-text"></p>
+            <div class="options" id="options-container"></div>
+        </div>
+        <p id="result-message">Your Score: <span id="score"></span></p>
+        <p id="score-details">Marks Obtained: <span id="marks-obtained"></span> / Out of: <span id="out-of"></span></p>
+        <button id="restart-btn" onclick="restartQuiz()">Restart Quiz</button>
+    </div>
+
+    <div id="certificate-container">
+        <h2>Certificate of Passing</h2>
+        <div class="certificate-content">
+            <p class="certificate-title">Certificate of Passing</p>
+            <p class="certificate-details">Congratulations <span id="certificate-name"></span>!</p>
+            <p class="certificate-details">You have successfully passed the quiz with a score of <span id="certificate-score"></span>.</p>
+            <p class="certificate-details">This certificate is awarded on <span id="certificate-date"></span>.</p>
+            <button class="certificate-button" onclick="generatePDF()">Download Certificate as PDF</button>
+        </div>
+    </div>
+
+    <script>
+        const quizzes = {
+            DSA: [
+                { question: "What does FIFO stand for?", options: ["First In First Out", "First Input First Output", "Fast In First Out"], answer: "First In First Out" },
+                { question: "What is the time complexity of binary search?", options: ["O(1)", "O(log n)", "O(n)"], answer: "O(log n)" },
+                { question: "Which data structure uses LIFO order of elements?", options: ["Queue", "Stack", "Tree"], answer: "Stack" },
+                { question: "What is the worst-case time complexity of quicksort algorithm?", options: ["O(n)", "O(n log n)", "O(n^2)"], answer: "O(n^2)" }
+            ],
+            "Digital Electronics": [
+                { question: "What is a flip-flop?", options: ["A type of circuit", "A type of software", "A programming language"], answer: "A type of circuit" },
+                { question: "What does a digital logic gate do?", options: ["Performs arithmetic", "Stores data", "Processes logical operations"], answer: "Processes logical operations" }
+            ],
+            "C Programming": [
+                { question: "What is the correct syntax to output 'Hello World' in C?", options: ["print('Hello World');", "echo 'Hello World';", "printf('Hello World');"], answer: "printf('Hello World');" },
+                { question: "Which data type is used to create a variable that should store text?", options: ["int", "float", "char"], answer: "char" }
+            ]
+            // Add more quizzes as needed
+        };
+
+        let currentQuiz = [];
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        const registrationForm = document.getElementById('registration-form');
+        const quizContainer = document.getElementById('quiz-container');
+        const questionTextElement = document.getElementById('question-text');
+        const optionsContainer = document.getElementById('options-container');
+        const resultMessage = document.getElementById('result-message');
+        const scoreElement = document.getElementById('score');
+        const scoreDetailsElement = document.getElementById('score-details');
+        const marksObtainedElement = document.getElementById('marks-obtained');
+        const outOfElement = document.getElementById('out-of');
+        const certificateContainer = document.getElementById('certificate-container');
+        const certificateNameElement = document.getElementById('certificate-name');
+        const certificateScoreElement = document.getElementById('certificate-score');
+        const certificateDateElement = document.getElementById('certificate-date');
+
+        function saveFormData(event) {
+            event.preventDefault(); // Prevent form submission
+            const formData = new FormData(registrationForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const topic = formData.get('topic');
+
+            console.log('Name:', name);
+            console.log('Email:', email);
+            console.log('Topic:', topic);
+
+            return false;
+        }
+
+        function saveAndProceedToQuiz() {
+            const formData = new FormData(registrationForm);
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const topic = formData.get('topic');
+
+            console.log('Name:', name);
+            console.log('Email:', email);
+            console.log('Topic:', topic);
+
+            currentQuiz = quizzes[topic];
+            showQuiz(topic);
+        }
+
+        function showQuiz(topic) {
+            registrationForm.style.display = 'none';
+            quizContainer.style.display = 'block';
+            document.getElementById('quiz-title').textContent = topic + " Quiz";
+            showNextQuestion();
+        }
+
+        function showNextQuestion() {
+            if (currentQuestionIndex < currentQuiz.length) {
+                const currentQuestion = currentQuiz[currentQuestionIndex];
+                questionTextElement.textContent = currentQuestion.question;
+
+                optionsContainer.innerHTML = '';
+                currentQuestion.options.forEach(option => {
+                    const button = document.createElement('button');
+                    button.textContent = option;
+                    button.onclick = () => checkAnswer(option);
+                    optionsContainer.appendChild(button);
+                });
+            } else {
+                showResults();
+            }
+        }
+
+        function checkAnswer(selectedOption) {
+            const currentQuestion = currentQuiz[currentQuestionIndex];
+            if (selectedOption === currentQuestion.answer) {
+                score++;
+            }
+            currentQuestionIndex++;
+            showNextQuestion();
+        }
+
+        function showResults() {
+            quizContainer.style.display = 'none';
+            resultMessage.style.display = 'block';
+            scoreElement.textContent = score;
+            scoreDetailsElement.style.display = 'block';
+            marksObtainedElement.textContent = score;
+            outOfElement.textContent = currentQuiz.length;
+            document.getElementById('restart-btn').style.display = 'block';
+
+            certificateNameElement.textContent = document.getElementById('name').value;
+            certificateScoreElement.textContent = score;
+            certificateDateElement.textContent = new Date().toLocaleDateString();
+            certificateContainer.style.display = 'block';
+        }
+
+        function restartQuiz() {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultMessage.style.display = 'none';
+            scoreDetailsElement.style.display = 'none';
+            certificateContainer.style.display = 'none';
+            showNextQuestion();
+            quizContainer.style.display = 'block';
+        }
+
+        function generatePDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF('landscape');
+
+            const name = document.getElementById('certificate-name').textContent;
+            const score = document.getElementById('certificate-score').textContent;
+            const date = document.getElementById('certificate-date').textContent;
+
+            doc.setFontSize(22);
+            doc.text('Certificate of Passing', 105, 40, null, null, 'center');
+            doc.setFontSize(16);
+            doc.text(`Congratulations ${name}!`, 105, 60, null, null, 'center');
+            doc.text(`You have successfully passed the quiz with a score of ${score}.`, 105, 80, null, null, 'center');
+            doc.text(`This certificate is awarded on ${date}.`, 105, 100, null, null, 'center');
+
+            doc.save('certificate.pdf');
+        }
+    </script>
+</body>
+</html>

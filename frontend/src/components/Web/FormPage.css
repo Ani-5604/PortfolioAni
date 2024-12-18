@@ -1,0 +1,53 @@
+.form-page {
+  text-align: center;
+  box-sizing: border-box;
+  background-color: rgba(0, 13, 196, 0.555); /* Center the content */
+  border-color: black;
+  padding: 20px;
+}
+
+.form-image {
+  box-sizing: border-box;
+  box-shadow: inset;
+  width: 50%;
+  height: auto; /* Adjust height as needed */
+  margin-bottom: 20px;
+}
+
+.navigation-buttons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.nav-button {
+  background-color: transparent;
+  border: none;
+  font-size: 24px;
+  color: #fff;
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s ease;
+}
+
+.nav-button:hover {
+  color: #370091;
+}
+
+.back-home-button {
+  background-color: #dd3ac7;
+  color: #fff;
+  height: 40%;
+  width: 40%;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.back-home-button:hover {
+  background-color: #9d7ad6;
+  color: #fff;
+}
