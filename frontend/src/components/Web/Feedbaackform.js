@@ -21,7 +21,7 @@ const FeedbackForm = () => {
         e.preventDefault();
 
         try {
-            const response = await fetch('http://localhost:6001/feedback', {
+            const response = await fetch('https://portfolioanindita.onrender.com/feedback', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

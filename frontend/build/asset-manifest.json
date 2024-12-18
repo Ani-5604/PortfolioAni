@@ -1,0 +1,18 @@
+{
+  "files": {
+    "main.css": "/static/css/main.3bc09590.css",
+    "main.js": "/static/js/main.06189ed5.js",
+    "static/media/AgeCalculator.jpg": "/static/media/AgeCalculator.715167aac38e8ba25d4d.jpg",
+    "static/media/todo.jpg": "/static/media/todo.e9a724750b0bde3cbad4.jpg",
+    "static/media/ani.jpg": "/static/media/ani.0bbc38598b5c4850a40b.jpg",
+    "static/media/anindita.jpg": "/static/media/anindita.6c4772c1f13e8c9c8120.jpg",
+    "static/media/tictactoe.jpg": "/static/media/tictactoe.f15e38a97a2cb0cf7eaa.jpg",
+    "index.html": "/index.html",
+    "main.3bc09590.css.map": "/static/css/main.3bc09590.css.map",
+    "main.06189ed5.js.map": "/static/js/main.06189ed5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3bc09590.css",
+    "static/js/main.06189ed5.js"
+  ]
+}
