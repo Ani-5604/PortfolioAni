@@ -135,64 +135,59 @@ function Web() {
           <p><b>In my free time, I enjoy reading, hiking, and experimenting with new coding projects. I'm also an avid traveler and love exploring new cultures and cuisines.</b></p>
         </div>
       </section>
-
       <section id="resume">
-        <h1 align="center"><u>RESUME</u></h1>
-        <div className="resume">
-          <div className="resume-item">
-            <div className="personal-info">
-         
+  <h1 align="center"><u>RESUME</u></h1>
+  <div className="resume">
+    <div className="resume-item">
+      <div className="personal-info">
+        <img src={aninditaImage} alt="Anindita Ghosh" />
+        <p align="justify" className="moral"><b>"If you can think, then you can create."</b></p>
+        <p align="right" className="signature">~Anindita Ghosh</p>
+      </div>
+      <h3>Summary</h3>
+      <p>As a prospective full-stack software engineer, I'm deeply passionate about developing scalable, high-performance, and reliable software systems.</p>
+      <h3>Education</h3>
+      <p><strong>Bachelor of Engineering in Information Technology (2022-2026)</strong><br />St. Thomas College of Engineering & Technology, Kolkata</p>
+      <p><strong>Class 12th Board (2022)</strong><br />Dum Dum Ananda Ashram Sarada Vidyapith (WBCHSE)</p>
+      <p><strong>Class 10th Board (2020)</strong><br />Baranagore Rajkumari Memorial Girl's High School (WBBSE)</p>
+      <h3>Experience</h3>
+      <p>Excited to announce that I've been selected for a Web Development Internship at IntechtechSoft Services Pvt Ltd! Looking forward to gaining knowledge and experience.</p>
+    </div>
 
-<img src={aninditaImage} alt="Anindita Ghosh" />
-
-              <p align="justify" className="moral"><b>"If you can think, then you can create."</b></p>
-              <p align="right" className="signature">~Anindita Ghosh</p>
-            </div>
-            <h3>Summary</h3>
-            <p>As a prospective full-stack software engineer, I'm deeply passionate about developing scalable, high-performance, and reliable software systems.</p>
-            <h3>Education</h3>
-            <p><strong>Bachelor of Engineering in Information Technology (2022-2026)</strong><br />St. Thomas College of Engineering & Technology, Kolkata</p>
-            <p><strong>Class 12th Board (2022)</strong><br />Dum Dum Ananda Ashram Sarada Vidyapith (WBCHSE)</p>
-            <p><strong>Class 10th Board (2020)</strong><br />Baranagore Rajkumari Memorial Girl's High School (WBBSE)</p>
-            <h3>Experience</h3>
-            <p>Excited to announce that I've been selected for a Web Development Internship at IntechtechSoft Services Pvt Ltd! Looking forward to gaining knowledge and experience.</p>
-          </div>
-
-          <div className="resume-item">
-    <h3>Skills</h3>
-    <div className="skill-name"><span className="fab fa-python"></span> Python</div>
-    <div className="skill-bar">
+    <div className="resume-item">
+      <h3>Skills</h3>
+      <div className="skill-name"><span className="fab fa-python"></span> Python</div>
+      <div className="skill-bar">
         <div className="skill-bar-fill python" style={{ width: '90%' }} data-label="90%"></div>
-    </div>
-    <div className="skill-name"><span className="fab fa-java"></span> Java</div>
-    <div className="skill-bar">
+      </div>
+      <div className="skill-name"><span className="fab fa-java"></span> Java</div>
+      <div className="skill-bar">
         <div className="skill-bar-fill java" style={{ width: '85%' }} data-label="85%"></div>
-    </div>
-    <div className="skill-name"><span className="fab fa-html5"></span> HTML/CSS/JS</div>
-    <div className="skill-bar">
+      </div>
+      <div className="skill-name"><span className="fab fa-html5"></span> HTML/CSS/JS</div>
+      <div className="skill-bar">
         <div className="skill-bar-fill htmlcssjs" style={{ width: '80%' }} data-label="80%"></div>
-    </div>
-    <div className="skill-name"><span className="fab fa-laptop-code"></span> C</div>
-    <div className="skill-bar">
+      </div>
+      <div className="skill-name"><span className="fab fa-laptop-code"></span> C</div>
+      <div className="skill-bar">
         <div className="skill-bar-fill c" style={{ width: '75%' }} data-label="75%"></div>
+      </div>
+      <h3>Hobbies</h3>
+      <ol>
+        <li>Listening to Music</li>
+        <li>Travelling</li>
+        <li>Photography</li>
+        <li>Exploring New Technologies</li>
+      </ol>
+      <div className="achievement-buttons">
+        <p>To know more, click 👇</p>
+        <a href="/CV.pdf" target="_blank">Resume</a>
+      </div>
     </div>
-            <h3>Hobbies</h3>
-            <ol>
-              <li>Listening to Music</li>
-              <li>Travelling</li>
-              <li>Photography</li>
-              <li>Exploring New Technologies</li>
-            </ol>
-            <div className="achievement-buttons">
-              <p>To know more, click 👇</p>
-              <a href="/CV.pdf" target="_blank">Resume</a>
+  </div>
+</section>
 
 
-
-            </div>
-          </div>
-        </div>
-      </section>
 
       <section id="portfolio" className="section portfolio">
   <h1 align="left" fontcolor='blue'>Portfolio</h1>    <br></br>
