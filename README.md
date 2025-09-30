@@ -26,8 +26,6 @@ cd PortfolioAni
 2. Open Frontend
 Simply open index.html or any other HTML file in a browser.
 
-3. Run Backend (Optional)
-If your project uses Node.js backend:
 
 bash
 Copy code
@@ -58,5 +56,3 @@ GitHub: Ani-5604
 
 Made with ❤️ by Anindita Ghosh
 
-yaml
-Copy code
